@@ -36,10 +36,10 @@ module.exports.loop = function () {
             bodyParts = [WORK,WORK,CARRY,MOVE,MOVE];
             break;
         case 4:
-            bodyParts = [WORK,WORK,CARRY,CARRY,MOVE,MOVE];
+            bodyParts = [WORK,WORK,WORK,CARRY,MOVE];
             break;
         case 5:
-            bodyParts = [WORK,WORK,CARRY,CARRY,MOVE,MOVE,MOVE];
+            bodyParts = [WORK,WORK,WORK,CARRY,MOVE,MOVE];
             break;
     }
 
@@ -50,13 +50,13 @@ module.exports.loop = function () {
             Game.spawns['Spawn1'].spawnCreep(bodyParts, newName, 
                 {memory: {role: 'harvester'}});
         }
-        else if(upgraders.length < RCL*3) {
+        else if(upgraders.length < RCL*4) {
             var newName = 'Upgrader' + Game.time;
             console.log(`Spawning new upgrader: ${newName} (${bodyParts})`);
             Game.spawns['Spawn1'].spawnCreep(bodyParts, newName, 
                 {memory: {role: 'upgrader'}});
         }
-        else if(builders.length < RCL*3) {
+        else if(builders.length < RCL*5) {
             var newName = 'Builder' + Game.time;
             console.log(`Spawning new builder: ${newName} (${bodyParts})`);
             Game.spawns['Spawn1'].spawnCreep(bodyParts, newName, 

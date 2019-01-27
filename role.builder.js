@@ -3,22 +3,22 @@ var roleBuilder = {
     /** @param {Creep} creep **/
     run: function(creep) {
         
-        var buildingTargets = Game.spawns["Spawn1"].room.find(FIND_CONSTRUCTION_SITES);
         var structureTargets = Game.spawns["Spawn1"].room.find(FIND_STRUCTURES, {
             filter: (structure) => {
                 return (structure.structureType == STRUCTURE_EXTENSION ||
                         structure.structureType == STRUCTURE_TOWER) && structure.energy < structure.energyCapacity;
             }
         });
+        var buildingTargets = Game.spawns["Spawn1"].room.find(FIND_CONSTRUCTION_SITES);
+        var repairTargets = Game.spawns["Spawn1"].room.find(FIND_STRUCTURES, {
+            filter: object => object.hits < object.hitsMax
+        });
+        repairTargets.sort((a,b) => a.hits - b.hits);
         var home = Game.spawns["Spawn1"].room.find(FIND_STRUCTURES, {
             filter: (structure) => {
                 return (structure.structureType == STRUCTURE_SPAWN) && structure.energy < structure.energyCapacity;
             }
         });
-        var repairTargets = Game.spawns["Spawn1"].room.find(FIND_STRUCTURES, {
-            filter: object => object.hits < object.hitsMax
-        });
-        repairTargets.sort((a,b) => a.hits - b.hits);
 
 	    if(creep.memory.subrole != 'harvest' && creep.carry.energy == 0) {
             creep.memory.subrole = 'harvest';
@@ -58,6 +58,7 @@ var roleBuilder = {
             }
             else{
                 creep.memory.subrole = 'home';
+	            creep.say('⚡ home');
             }
         }
         else if (creep.memory.subrole == 'structure') {
@@ -69,6 +70,7 @@ var roleBuilder = {
             }
             else{
                 creep.memory.subrole = 'home';
+	            creep.say('⚡ home');
             }
         }
 	    else if(creep.memory.subrole == 'building'){
@@ -80,13 +82,18 @@ var roleBuilder = {
             }
             else{
                 creep.memory.subrole = 'home';
+	            creep.say('⚡ home');
             }
 	    }
-        else if (creep.memory.subrole == 'home') {
+        else if (creep.memory.subrole == 'home' && home[0] != undefined) {
             creep.memory.target = home[0].id;
             if(creep.transfer(Game.getObjectById(creep.memory.target), RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
                 creep.moveTo(Game.getObjectById(creep.memory.target), {visualizePathStyle: {stroke: '#ffffff'}});
             }
+        }
+        else{
+            creep.memory.subrole = 'harvest';
+            creep.say('🔄 harvest');
         }
 	}
 };

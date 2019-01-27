@@ -50,13 +50,13 @@ module.exports.loop = function () {
             Game.spawns['Spawn1'].spawnCreep(bodyParts, newName, 
                 {memory: {role: 'harvester'}});
         }
-        else if(upgraders.length < RCL*2) {
+        else if(upgraders.length < RCL*3) {
             var newName = 'Upgrader' + Game.time;
             console.log(`Spawning new upgrader: ${newName} (${bodyParts})`);
             Game.spawns['Spawn1'].spawnCreep(bodyParts, newName, 
                 {memory: {role: 'upgrader'}});
         }
-        else if(builders.length < RCL*2) {
+        else if(builders.length < RCL*3) {
             var newName = 'Builder' + Game.time;
             console.log(`Spawning new builder: ${newName} (${bodyParts})`);
             Game.spawns['Spawn1'].spawnCreep(bodyParts, newName, 

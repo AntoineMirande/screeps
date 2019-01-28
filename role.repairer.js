@@ -11,7 +11,7 @@ let roleRepairer = {
             creep.memory.repairing = false;
             creep.say('🔄 harvest');
 	    }
-	    if(!creep.memory.repairing && creep.carry.energy == creep.carryCapacity) {
+	    if(!creep.memory.repairing && creep.carry.energy == creep.carryCapacity && repairTargets.length) {
 	        creep.memory.repairing = true;
 	        creep.memory.target = repairTargets[0].id;
 	        creep.say('⚡ repair');

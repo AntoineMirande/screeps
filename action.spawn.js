@@ -31,19 +31,19 @@ let actionSpawn = {
                 bodyParts = [WORK,WORK,WORK,CARRY,CARRY,MOVE,MOVE];
         }
 
-        if(harvesters.length < RCL*3) {
+        if(harvesters.length < RCL*2) {
             let newName = 'Harvester' + Game.time;
             console.log(`Spawning new harvester: ${newName} (${bodyParts})`);
             Game.spawns['Spawn1'].spawnCreep(bodyParts, newName, 
                 {memory: {role: 'harvester'}});
         }
-        else if(repairers.length < RCL*1) {
+        else if(repairers.length < RCL*1-1) {
             let newName = 'Repairer' + Game.time;
             console.log(`Spawning new repairer: ${newName} (${bodyParts})`);
             Game.spawns['Spawn1'].spawnCreep(bodyParts, newName, 
                 {memory: {role: 'repairer'}});
         }
-        else if(builders.length < RCL*2) {
+        else if(builders.length < RCL*2-1) {
             let newName = 'Builder' + Game.time;
             console.log(`Spawning new builder: ${newName} (${bodyParts})`);
             Game.spawns['Spawn1'].spawnCreep(bodyParts, newName, 

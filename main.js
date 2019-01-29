@@ -1,15 +1,17 @@
-let roleHarvester = require('role.harvester');
-let roleUpgrader = require('role.upgrader');
-let roleBuilder = require('role.builder');
-let roleRepairer = require('role.repairer');
-let actionSpawn = require('action.spawn');
+const roleHarvester = require('role.harvester');
+const roleUpgrader = require('role.upgrader');
+const roleBuilder = require('role.builder');
+const roleRepairer = require('role.repairer');
+const actionSpawn = require('action.spawn');
+const roleTower = require('role.tower');
+const roleWorker = require('role.worker');
 
 module.exports.loop = function () {
     
     let myRoom = Game.spawns["Spawn1"].room;
     let RCL = myRoom.controller.level;
     let extensions = myRoom.find(FIND_MY_STRUCTURES, { filter: (structure) => structure.structureType == STRUCTURE_EXTENSION });
-    let fullExtensions = extensions.filter(extension => extension.energy == extension.energyCapacity);
+    let fullExtensions = extensions.filter(extension => extension.energy == extension.energyCapacity).length;
     
     for(let name in Memory.creeps) {
         if(!Game.creeps[name]) {
@@ -18,7 +20,7 @@ module.exports.loop = function () {
         }
     }
 
-    if(Game.spawns['Spawn1'].energy == Game.spawns.Spawn1.energyCapacity && extensions.length == fullExtensions.length){
+    if(Game.spawns['Spawn1'].energy == Game.spawns.Spawn1.energyCapacity && fullExtensions > Math.floor(extensions.length/2)){
         actionSpawn.create(RCL, fullExtensions);
     }
     
@@ -33,6 +35,9 @@ module.exports.loop = function () {
 
     for(let name in Game.creeps) {
         let creep = Game.creeps[name];
+        if(creep.memory.role == 'worker') {
+            roleWorker.run(creep);
+        }
         if(creep.memory.role == 'harvester') {
             roleHarvester.run(creep);
         }
@@ -46,4 +51,6 @@ module.exports.loop = function () {
             roleRepairer.run(creep);
         }
     }
+    
+    roleTower.defend();
 }

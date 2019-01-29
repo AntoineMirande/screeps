@@ -16,15 +16,15 @@ let roleBuilderTask = {
             creep.say('🔄 harvest');
 	    }
 	    else {
-            if(buildingTargets.length > 0){
-    	        creep.memory.subrole = 'building';
-                creep.memory.target = buildingTargets[0].id;
-    	        creep.say('🚧 build');
-	        }
-	        else if(structureTargets.length > 0){
+	        if(structureTargets.length > 0){
 	            creep.memory.subrole = 'structure';
                 creep.memory.target = structureTargets[0].id;
 	            creep.say('⚡ struct');
+	        }
+            else if(buildingTargets.length > 0){
+    	        creep.memory.subrole = 'building';
+                creep.memory.target = buildingTargets[0].id;
+    	        creep.say('🚧 build');
 	        }
         }
     }

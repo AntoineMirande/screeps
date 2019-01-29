@@ -20,7 +20,7 @@ module.exports.loop = function () {
         }
     }
 
-    if(Game.spawns['Spawn1'].energy == Game.spawns.Spawn1.energyCapacity && fullExtensions > Math.floor(extensions.length/2)){
+    if(Game.spawns['Spawn1'].energy == Game.spawns.Spawn1.energyCapacity && fullExtensions >= Math.floor(extensions.length/3)){
         actionSpawn.create(RCL, fullExtensions);
     }
     

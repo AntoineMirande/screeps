@@ -17,7 +17,9 @@ const actionSpawn = {
         let repairers = _.filter(Game.creeps, (creep) => creep.memory.role == 'repairer');
         let workers = _.filter(Game.creeps, (creep) => creep.memory.role == 'worker');
 
-        let workerBodyParts = Array(Math.floor(fullExtensions/2)+1).fill(WORK).concat(Array(Math.floor(fullExtensions%2+1)).fill(CARRY)).concat([MOVE]);
+        let workerBodyParts = Array(Math.floor(fullExtensions/3)+1).fill(WORK)
+            .concat(Array(Math.ceil(fullExtensions/100)+1).fill(CARRY))
+            .concat(Array(Math.ceil(fullExtensions/100)+1).fill(MOVE));
         let harvesterBodyParts = [WORK,CARRY,MOVE];
         let repairerBodyParts = [WORK].concat(Array(Math.floor(fullExtensions/2)+1).fill(CARRY)).concat([MOVE]);
         let builderBodyParts = [WORK].concat(Array(Math.floor(fullExtensions/3)).fill(CARRY)).concat([MOVE,MOVE]);
@@ -30,7 +32,7 @@ const actionSpawn = {
                 Game.spawns['Spawn1'].spawnCreep(harvesterBodyParts, newName, 
                     {memory: {role: 'harvester'}});
             }
-            else if (fullExtensions >= Math.floor(extensions.length/2)) {
+            else if (Game.spawns['Spawn1'].energy == Game.spawns['Spawn1'].energyCapacity && fullExtensions >= Math.floor(extensions.length/2)) {
                 if(workers.length < RCL+1 && containers.length) {
                     let newName = 'Worker' + Game.time;
                     console.log(`Spawning new worker: ${newName} (${workerBodyParts})`);

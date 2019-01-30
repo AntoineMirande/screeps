@@ -34,7 +34,8 @@ const roleBuilder = {
             let structureTargets = Game.spawns["Spawn1"].room.find(FIND_STRUCTURES, {
                     filter: (structure) => {
                         return (structure.structureType == STRUCTURE_EXTENSION ||
-                                structure.structureType == STRUCTURE_TOWER) && structure.energy < structure.energyCapacity;
+                            structure.structureType == STRUCTURE_SPAWN ||
+                            structure.structureType == STRUCTURE_TOWER) && structure.energy < structure.energyCapacity;
                     }
             });
             if (structureTargets.find(target => target.id == creep.memory.target) && creep.carry.energy > 0) {

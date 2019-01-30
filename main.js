@@ -8,11 +8,6 @@ const roleWorker = require('role.worker');
 
 module.exports.loop = function () {
     
-    let myRoom = Game.spawns["Spawn1"].room;
-    let RCL = myRoom.controller.level;
-    let extensions = myRoom.find(FIND_MY_STRUCTURES, { filter: (structure) => structure.structureType == STRUCTURE_EXTENSION });
-    let fullExtensions = extensions.filter(extension => extension.energy == extension.energyCapacity).length;
-    
     for(let name in Memory.creeps) {
         if(!Game.creeps[name]) {
             delete Memory.creeps[name];
@@ -20,9 +15,7 @@ module.exports.loop = function () {
         }
     }
 
-    if(Game.spawns['Spawn1'].energy == Game.spawns.Spawn1.energyCapacity && fullExtensions >= Math.floor(extensions.length/3)){
-        actionSpawn.create(RCL, fullExtensions);
-    }
+    actionSpawn.create();
     
     if(Game.spawns['Spawn1'].spawning) { 
         let spawningCreep = Game.creeps[Game.spawns['Spawn1'].spawning.name];

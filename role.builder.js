@@ -16,7 +16,8 @@ const roleBuilder = {
                     filter: (i) => i.structureType == STRUCTURE_CONTAINER &&
                                    i.store[RESOURCE_ENERGY] > 0
                 });
-                if (sources.length > 1) {
+                let workers = _.filter(Game.creeps, (creep) => creep.memory.role == 'worker');
+                if (sources.length || workers.length) {
                     if(creep.withdraw(sources.slice(-1)[0], RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
                         creep.moveTo(sources.slice(-1)[0], {visualizePathStyle: {stroke: '#ffaa00'}});
                     }

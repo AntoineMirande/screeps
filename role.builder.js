@@ -12,14 +12,23 @@ const roleBuilder = {
                 roleBuilderTask.findTask(creep);
 	        }
 	        else{
+                let containers = Game.spawns["Spawn1"].room.find(FIND_STRUCTURES, {
+                    filter: (i) => i.structureType == STRUCTURE_CONTAINER
+                });
                 let sources = Game.spawns["Spawn1"].room.find(FIND_STRUCTURES, {
                     filter: (i) => i.structureType == STRUCTURE_CONTAINER &&
                                    i.store[RESOURCE_ENERGY] > 0
                 });
                 let workers = _.filter(Game.creeps, (creep) => creep.memory.role == 'worker');
-                if (sources.length || workers.length > 1) {
+                if (sources.length && workers.length > 1) {
                     if(creep.withdraw(sources.slice(-1)[0], RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
                         creep.moveTo(sources.slice(-1)[0], {visualizePathStyle: {stroke: '#ffaa00'}});
+                    }
+                }
+                else if (containers.length && workers.length > 1) {
+                    const path = creep.pos.findPathTo(Game.flags.Flag1);
+                    if(path.length > 0) {
+                        creep.move(path[0].direction);
                     }
                 }
                 else{

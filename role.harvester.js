@@ -8,7 +8,7 @@ const roleHarvester = {
                                i.store[RESOURCE_ENERGY] > 0
             });
             let workers = _.filter(Game.creeps, (creep) => creep.memory.role == 'worker');
-            if (sources.length || workers.length) {
+            if (sources.length || workers.length > 1) {
                 if(creep.withdraw(sources[0], RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
                     creep.moveTo(sources[0], {visualizePathStyle: {stroke: '#ffaa00'}});
                 }

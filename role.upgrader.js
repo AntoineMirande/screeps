@@ -22,7 +22,7 @@ const roleUpgrader = {
                 filter: (i) => i.structureType == STRUCTURE_CONTAINER &&
                                i.store[RESOURCE_ENERGY] > 0
             });
-            if (sources.length) {
+            if (sources.length > 1) {
                 if(creep.withdraw(sources.slice(-1)[0], RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
                     creep.moveTo(sources.slice(-1)[0], {visualizePathStyle: {stroke: '#ffaa00'}});
                 }

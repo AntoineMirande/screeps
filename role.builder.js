@@ -10,6 +10,7 @@ const roleBuilder = {
 	        if (creep.carry.energy == creep.carryCapacity){
 	            creep.say('?');
                 roleBuilderTask.findTask(creep);
+                
 	        }
 	        else{
                 let containers = Game.spawns["Spawn1"].room.find(FIND_STRUCTURES, {

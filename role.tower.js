@@ -6,11 +6,12 @@ let roleTower = {
                     filter: { structureType: STRUCTURE_TOWER }
                 })
         _.forEach(towers, function(tower){
-            let closestDamagedStructure = tower.pos.findClosestByRange(FIND_STRUCTURES, {
+            let closestDamagedStructure = tower.room.find(FIND_STRUCTURES, {
                 filter: (structure) => structure.hits < structure.hitsMax
             });
-            if(closestDamagedStructure) {
-                tower.repair(closestDamagedStructure);
+            closestDamagedStructure.sort((a,b) => a.hits - b.hits);
+            if(closestDamagedStructure.length && tower.energy > 800) {
+                tower.repair(closestDamagedStructure[0]);
             }
             let closestHostile = tower.pos.findClosestByRange(FIND_HOSTILE_CREEPS);
             if(closestHostile) {

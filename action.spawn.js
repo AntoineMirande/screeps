@@ -10,6 +10,10 @@ const actionSpawn = {
             filter: (i) => i.structureType == STRUCTURE_CONTAINER &&
                            i.store[RESOURCE_ENERGY] < i.storeCapacity
         });
+        let towers = Game.spawns.Spawn1.room.find(FIND_MY_STRUCTURES, {
+            filter: { structureType: STRUCTURE_TOWER }
+        });
+        let buildingTargets = Game.spawns["Spawn1"].room.find(FIND_CONSTRUCTION_SITES);
 
         let harvesters = _.filter(Game.creeps, (creep) => creep.memory.role == 'harvester');
         let upgraders = _.filter(Game.creeps, (creep) => creep.memory.role == 'upgrader');
@@ -17,35 +21,35 @@ const actionSpawn = {
         let repairers = _.filter(Game.creeps, (creep) => creep.memory.role == 'repairer');
         let workers = _.filter(Game.creeps, (creep) => creep.memory.role == 'worker');
 
-        let workerBodyParts = Array(Math.floor(fullExtensions/3)+1).fill(WORK)
+        let workerBodyParts = Array(Math.floor(fullExtensions/2.1)+1).fill(WORK)
             .concat(Array(Math.ceil(fullExtensions/100)+1).fill(CARRY))
             .concat(Array(Math.ceil(fullExtensions/100)+1).fill(MOVE));
         let harvesterBodyParts = [WORK,CARRY,MOVE];
         let repairerBodyParts = [WORK].concat(Array(Math.floor(fullExtensions/2)+1).fill(CARRY)).concat([MOVE]);
         let builderBodyParts = [WORK].concat(Array(Math.floor(fullExtensions/3)).fill(CARRY)).concat([MOVE,MOVE]);
         let upgraderBodyParts = [WORK].concat(Array(Math.floor(fullExtensions/3)).fill(CARRY)).concat([MOVE,MOVE]);
-
+        
         if (Game.spawns['Spawn1'].energy >= 200) {
-            if(harvesters.length < RCL+1) {
+            if(harvesters.length < RCL) {
                 let newName = 'Harvester' + Game.time;
                 console.log(`Spawning new harvester: ${newName} (${harvesterBodyParts})`);
                 Game.spawns['Spawn1'].spawnCreep(harvesterBodyParts, newName, 
                     {memory: {role: 'harvester'}});
             }
-            else if (Game.spawns['Spawn1'].energy == Game.spawns['Spawn1'].energyCapacity && fullExtensions >= Math.floor(extensions.length/2)) {
-                if(workers.length < RCL+1 && containers.length) {
+            else if (Game.spawns['Spawn1'].energy == Game.spawns['Spawn1'].energyCapacity && fullExtensions >= Math.ceil(extensions.length/2)) {
+                if(workers.length < 4 && containers.length) {
                     let newName = 'Worker' + Game.time;
                     console.log(`Spawning new worker: ${newName} (${workerBodyParts})`);
                     Game.spawns['Spawn1'].spawnCreep(workerBodyParts, newName, 
                         {memory: {role: 'worker'}});
                 }
-                else if(builders.length < RCL+1) {
+                else if(builders.length < 3 && (buildingTargets.length || towers.length)) {
                     let newName = 'Builder' + Game.time;
                     console.log(`Spawning new builder: ${newName} (${builderBodyParts})`);
                     Game.spawns['Spawn1'].spawnCreep(builderBodyParts, newName, 
                         {memory: {role: 'builder', subrole: 'harvest'}});
                 }
-                else if(upgraders.length < RCL+2) {
+                else if(upgraders.length < 5) {
                     let newName = 'Upgrader' + Game.time;
                     console.log(`Spawning new upgrader: ${newName} (${upgraderBodyParts})`);
                     Game.spawns['Spawn1'].spawnCreep(upgraderBodyParts, newName, 

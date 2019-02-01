@@ -7,6 +7,7 @@ let roleBuilderTask = {
         let structureTargets = Game.spawns["Spawn1"].room.find(FIND_STRUCTURES, {
             filter: (structure) => {
                 return (structure.structureType == STRUCTURE_EXTENSION ||
+                        structure.structureType == STRUCTURE_SPAWN ||
                         structure.structureType == STRUCTURE_TOWER) && structure.energy < structure.energyCapacity;
             }
         });

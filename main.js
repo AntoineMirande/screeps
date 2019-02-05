@@ -15,7 +15,10 @@ module.exports.loop = function () {
         }
     }
 
-    actionSpawn.create();
+    let mySpawns = Game.spawns;
+    for (let mySpawn in mySpawns) {
+        actionSpawn.create(mySpawn);
+    }    
     
     if(Game.spawns['Spawn1'].spawning) { 
         let spawningCreep = Game.creeps[Game.spawns['Spawn1'].spawning.name];

@@ -46,4 +46,4 @@ module.exports.loop = function () {
     }
     
     roleTower.defend();
-}
+};

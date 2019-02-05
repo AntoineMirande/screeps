@@ -39,7 +39,7 @@ const actionSpawn = {
                     {memory: {role: 'harvester'}});
             }
             else if (Game.spawns['Spawn1'].energy == Game.spawns['Spawn1'].energyCapacity && fullExtensions >= Math.ceil(extensions.length/3)) {
-                if(workers.length < 4 && containers.length) {
+                if(workers.length < 3 && containers.length) {
                     let newName = 'Worker' + Game.time;
                     console.log(`Spawning new worker: ${newName} (${workerBodyParts})`);
                     Game.spawns['Spawn1'].spawnCreep(workerBodyParts, newName, 

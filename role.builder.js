@@ -1,10 +1,9 @@
+let roleBuilderTask = require('role.builder.task');
+    
 const roleBuilder = {
 
     /** @param {Creep} creep **/
     run: function(creep) {
-        
-        let roleBuilderTask = require('role.builder.task');
-        
 
 	    if(creep.memory.subrole == 'harvest'){
 	        if (creep.carry.energy == creep.carryCapacity){

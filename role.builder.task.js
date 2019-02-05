@@ -11,6 +11,7 @@ let roleBuilderTask = {
                         structure.structureType == STRUCTURE_TOWER) && structure.energy < structure.energyCapacity;
             }
         });
+        structureTargets.sort((a,b) => a.energy - b.energy);
         
 	    if(creep.memory.subrole != 'harvest' && creep.carry.energy == 0) {
             creep.memory.subrole = 'harvest';

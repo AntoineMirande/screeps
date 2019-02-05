@@ -27,7 +27,9 @@ const actionSpawn = {
         let harvesterBodyParts = [WORK,CARRY,MOVE];
         let repairerBodyParts = [WORK].concat(Array(Math.floor(fullExtensions/2)+1).fill(CARRY)).concat([MOVE]);
         let builderBodyParts = [WORK].concat(Array(Math.floor(fullExtensions/3)).fill(CARRY)).concat([MOVE,MOVE]);
-        let upgraderBodyParts = [WORK].concat(Array(Math.floor(fullExtensions/3)).fill(CARRY)).concat([MOVE,MOVE]);
+        let upgraderBodyParts = Array(Math.floor(fullExtensions/2.1)+1).fill(WORK)
+            .concat(Array(Math.ceil(fullExtensions/100)+1).fill(CARRY))
+            .concat(Array(Math.ceil(fullExtensions/100)+1).fill(MOVE));
         
         if (Game.spawns['Spawn1'].energy >= 200) {
             if(harvesters.length < RCL) {
@@ -36,7 +38,7 @@ const actionSpawn = {
                 Game.spawns['Spawn1'].spawnCreep(harvesterBodyParts, newName, 
                     {memory: {role: 'harvester'}});
             }
-            else if (Game.spawns['Spawn1'].energy == Game.spawns['Spawn1'].energyCapacity && fullExtensions >= Math.ceil(extensions.length/2)) {
+            else if (Game.spawns['Spawn1'].energy == Game.spawns['Spawn1'].energyCapacity && fullExtensions >= Math.ceil(extensions.length/3)) {
                 if(workers.length < 4 && containers.length) {
                     let newName = 'Worker' + Game.time;
                     console.log(`Spawning new worker: ${newName} (${workerBodyParts})`);
@@ -49,7 +51,7 @@ const actionSpawn = {
                     Game.spawns['Spawn1'].spawnCreep(builderBodyParts, newName, 
                         {memory: {role: 'builder', subrole: 'harvest'}});
                 }
-                else if(upgraders.length < 5) {
+                else if(upgraders.length < 6) {
                     let newName = 'Upgrader' + Game.time;
                     console.log(`Spawning new upgrader: ${newName} (${upgraderBodyParts})`);
                     Game.spawns['Spawn1'].spawnCreep(upgraderBodyParts, newName, 

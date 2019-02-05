@@ -48,6 +48,7 @@ const roleBuilder = {
                             structure.structureType == STRUCTURE_TOWER) && structure.energy < structure.energyCapacity;
                     }
             });
+            structureTargets.sort((a,b) => a.energy - b.energy);
             if (structureTargets.find(target => target.id == creep.memory.target) && creep.carry.energy > 0) {
                 if(creep.transfer(Game.getObjectById(creep.memory.target), RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
                     creep.moveTo(Game.getObjectById(creep.memory.target), {visualizePathStyle: {stroke: '#ffffff'}});

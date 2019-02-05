@@ -27,7 +27,7 @@ const actionSpawn = {
         let harvesterBodyParts = [WORK,CARRY,MOVE];
         let repairerBodyParts = [WORK].concat(Array(Math.floor(fullExtensions/2)+1).fill(CARRY)).concat([MOVE]);
         let builderBodyParts = [WORK].concat(Array(Math.floor(fullExtensions/3)).fill(CARRY)).concat([MOVE,MOVE]);
-        let upgraderBodyParts = Array(Math.floor(fullExtensions/2.1)+1).fill(WORK)
+        let upgraderBodyParts = Array(Math.floor(fullExtensions/3)+1).fill(WORK)
             .concat(Array(Math.ceil(fullExtensions/100)+1).fill(CARRY))
             .concat(Array(Math.ceil(fullExtensions/100)+1).fill(MOVE));
         

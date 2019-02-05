@@ -2,6 +2,11 @@ const roleHarvester = {
 
     /** @param {Creep} creep **/
     run: function(creep) {
+
+        const findDead = require('action.find.dead');
+
+        findDead.run(creep);
+
 	    if(creep.carry.energy < creep.carryCapacity) {
             let containers = Game.spawns["Spawn1"].room.find(FIND_STRUCTURES, {
                 filter: (i) => i.structureType == STRUCTURE_CONTAINER

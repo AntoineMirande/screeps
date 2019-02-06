@@ -14,8 +14,9 @@ const roleWorker = {
                                i.store[RESOURCE_ENERGY] < i.storeCapacity
             });
             if(targets.length > 0) {
-                if(creep.transfer(targets[0], RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-                    creep.moveTo(targets[0], {visualizePathStyle: {stroke: '#ffffff'}});
+                let closest = creep.pos.findClosestByRange(targets);
+                if(creep.transfer(closest, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+                    creep.moveTo(closest, {visualizePathStyle: {stroke: '#ffffff'}});
                 }
             }
             else{
@@ -27,8 +28,9 @@ const roleWorker = {
                     }
                 });
                 if(targets.length > 0) {
-                    if(creep.transfer(targets[0], RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-                        creep.moveTo(targets[0], {visualizePathStyle: {stroke: '#ffffff'}});
+                    let closest = creep.pos.findClosestByRange(targets);
+                    if(creep.transfer(closest, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+                        creep.moveTo(closest, {visualizePathStyle: {stroke: '#ffffff'}});
                     }
                 }
             }

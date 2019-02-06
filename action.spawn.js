@@ -51,7 +51,7 @@ const actionSpawn = {
                     Game.spawns[mySpawn].spawnCreep(builderBodyParts, newName, 
                         {memory: {role: 'builder', subrole: 'harvest', spawn: mySpawn}});
                 }
-                else if(upgraders.length < RCL*2+1) {
+                else if(upgraders.length < RCL*2) {
                     let newName = 'Upgrader' + Game.time;
                     console.log(`Spawning new upgrader: ${newName} (${upgraderBodyParts})`);
                     Game.spawns[mySpawn].spawnCreep(upgraderBodyParts, newName, 

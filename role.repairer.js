@@ -3,7 +3,7 @@ const roleRepairer = {
     /** @param {Creep} creep **/
     run: function(creep) {
         
-        let repairTargets = Game.spawns["Spawn1"].room.find(FIND_STRUCTURES, {
+        let repairTargets = Game.spawns[creep.memory.spawn].room.find(FIND_STRUCTURES, {
             filter: object => object.hits < object.hitsMax
         });
         
@@ -28,7 +28,7 @@ const roleRepairer = {
             }
         }
         else {
-            let sources = Game.spawns["Spawn1"].room.find(FIND_STRUCTURES, {
+            let sources = Game.spawns[creep.memory.spawn].room.find(FIND_STRUCTURES, {
                 filter: (i) => i.structureType == STRUCTURE_CONTAINER &&
                                i.store[RESOURCE_ENERGY] > 0
             });

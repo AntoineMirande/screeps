@@ -12,10 +12,10 @@ const roleBuilder = {
                 
 	        }
 	        else{
-                let containers = Game.spawns["Spawn1"].room.find(FIND_STRUCTURES, {
+                let containers = Game.spawns[creep.memory.spawn].room.find(FIND_STRUCTURES, {
                     filter: (i) => i.structureType == STRUCTURE_CONTAINER
                 });
-                let sources = Game.spawns["Spawn1"].room.find(FIND_STRUCTURES, {
+                let sources = Game.spawns[creep.memory.spawn].room.find(FIND_STRUCTURES, {
                     filter: (i) => i.structureType == STRUCTURE_CONTAINER &&
                                    i.store[RESOURCE_ENERGY] > 0
                 });
@@ -40,7 +40,7 @@ const roleBuilder = {
 	        }
         }
         else if (creep.memory.subrole == 'structure') {
-            let structureTargets = Game.spawns["Spawn1"].room.find(FIND_STRUCTURES, {
+            let structureTargets = Game.spawns[creep.memory.spawn].room.find(FIND_STRUCTURES, {
                     filter: (structure) => {
                         return (structure.structureType == STRUCTURE_EXTENSION ||
                             structure.structureType == STRUCTURE_SPAWN ||
@@ -59,7 +59,7 @@ const roleBuilder = {
             }
         }
 	    else if(creep.memory.subrole == 'building'){
-            let buildingTargets = Game.spawns["Spawn1"].room.find(FIND_CONSTRUCTION_SITES);
+            let buildingTargets = Game.spawns[creep.memory.spawn].room.find(FIND_CONSTRUCTION_SITES);
             if (buildingTargets.find(target => target.id == creep.memory.target) && creep.carry.energy > 0) {
                 if(creep.build(Game.getObjectById(creep.memory.target)) == ERR_NOT_IN_RANGE) {
                     creep.moveTo(Game.getObjectById(creep.memory.target), {visualizePathStyle: {stroke: '#ffffff'}});

@@ -15,15 +15,18 @@ module.exports.loop = function () {
         }
     }
 
-    actionSpawn.create();
+    let mySpawns = Game.spawns;
+    for (let mySpawn in mySpawns) {
+        actionSpawn.create(mySpawn);
     
-    if(Game.spawns['Spawn1'].spawning) { 
-        let spawningCreep = Game.creeps[Game.spawns['Spawn1'].spawning.name];
-        Game.spawns['Spawn1'].room.visual.text(
-            '🛠️' + spawningCreep.memory.role,
-            Game.spawns['Spawn1'].pos.x + 1, 
-            Game.spawns['Spawn1'].pos.y, 
-            {align: 'left', opacity: 0.8});
+        if(Game.spawns[mySpawn].spawning) { 
+            let spawningCreep = Game.creeps[Game.spawns[mySpawn].spawning.name];
+            Game.spawns[mySpawn].room.visual.text(
+                '🛠️' + spawningCreep.memory.role,
+                Game.spawns[mySpawn].pos.x + 1, 
+                Game.spawns[mySpawn].pos.y, 
+                {align: 'left', opacity: 0.8});
+        }
     }
 
     for(let name in Game.creeps) {

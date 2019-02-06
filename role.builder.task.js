@@ -3,8 +3,8 @@ let roleBuilderTask = {
     /** @param {Creep} creep **/
     findTask: function(creep){
         
-        let buildingTargets = Game.spawns["Spawn1"].room.find(FIND_CONSTRUCTION_SITES);
-        let structureTargets = Game.spawns["Spawn1"].room.find(FIND_STRUCTURES, {
+        let buildingTargets = Game.spawns[creep.memory.spawn].room.find(FIND_CONSTRUCTION_SITES);
+        let structureTargets = Game.spawns[creep.memory.spawn].room.find(FIND_STRUCTURES, {
             filter: (structure) => {
                 return (structure.structureType == STRUCTURE_EXTENSION ||
                         structure.structureType == STRUCTURE_SPAWN ||

@@ -10,7 +10,7 @@ let roleTower = {
                 filter: (structure) => structure.hits < structure.hitsMax
             });
             closestDamagedStructure.sort((a,b) => a.hits - b.hits);
-            if(closestDamagedStructure.length && tower.energy > 800) {
+            if(closestDamagedStructure.length && tower.energy > 700) {
                 tower.repair(closestDamagedStructure[0]);
             }
             let closestHostile = tower.pos.findClosestByRange(FIND_HOSTILE_CREEPS);

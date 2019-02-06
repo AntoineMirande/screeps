@@ -9,7 +9,7 @@ const roleWorker = {
             }
         }
         else {
-            let targets = Game.spawns["Spawn1"].room.find(FIND_STRUCTURES, {
+            let targets = Game.spawns[creep.memory.spawn].room.find(FIND_STRUCTURES, {
                 filter: (i) => i.structureType == STRUCTURE_CONTAINER &&
                                i.store[RESOURCE_ENERGY] < i.storeCapacity
             });
@@ -19,7 +19,7 @@ const roleWorker = {
                 }
             }
             else{
-                targets = Game.spawns["Spawn1"].room.find(FIND_STRUCTURES, {
+                targets = Game.spawns[creep.memory.spawn].room.find(FIND_STRUCTURES, {
                     filter: (structure) => {
                         return (structure.structureType == STRUCTURE_EXTENSION ||
                                 structure.structureType == STRUCTURE_SPAWN ||
